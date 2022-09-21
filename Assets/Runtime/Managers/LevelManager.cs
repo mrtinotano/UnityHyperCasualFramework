@@ -25,7 +25,6 @@ namespace voodooTest
         public void AddScore(int score)
         {
             Score += score;
-
             CanvasManager.Instance.UpdateLevelScore();
         }
     }
