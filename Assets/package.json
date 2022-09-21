@@ -1,11 +1,10 @@
 {
-  "name": "com.idk.hypercasualframework",
+  "name": "com.mrtinotano.hypercasualframework",
   "version": "1.0.0",
   "displayName": "Hyper Casual Framework",
   "description": "Framework to create hyper casual games",
   "unity": "2021.3",
-  "author": 
-  {
-    "name": "idk"
+  "author": {
+    "name": "mrtinotano"
   }
 }
