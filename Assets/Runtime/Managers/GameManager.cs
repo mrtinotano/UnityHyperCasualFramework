@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Utilities;
 
-namespace voodooTest
+namespace HyperCasual
 {
     public class GameManager : Singleton<GameManager>
     {

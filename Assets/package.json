@@ -5,7 +5,7 @@
   "description": "Framework to create hyper casual games",
   "unity": "2021.3",
   "dependencies": {
-    "com.mrtinotano.commonpackage": "1.0.0"
+    "com.mrtinotano.utilities": "1.0.0"
   },
   "author": {
     "name": "mrtinotano"

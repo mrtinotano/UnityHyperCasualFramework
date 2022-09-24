@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.mrtinotano.utilities": {
+      "version": "ssh://git@github.com/mrtinotano/UnityUtilitiesPackage.git?path=/Assets",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a53aec4504971643a50ba4c9a22144dbbeb8b62c"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.6",
       "depth": 1,
