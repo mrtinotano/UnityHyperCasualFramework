@@ -4,18 +4,13 @@ using Utilities;
 
 namespace HyperCasual
 {
-    public class CanvasManager : Singleton<CanvasManager>
+    public class UIManager : Singleton<UIManager>
     {
         [Header("Menus")]
         [SerializeField] private CanvasGroup menuCanvas;
         [SerializeField] private CanvasGroup levelCanvas;
         [SerializeField] private CanvasGroup winCanvas;
         [SerializeField] private CanvasGroup loseCanvas;
-
-        [Header("Scores")]
-        [SerializeField] private TextMeshProUGUI menuScoreText;
-        [SerializeField] private TextMeshProUGUI levelScoreText;
-        [SerializeField] private TextMeshProUGUI winScoreText;
 
         private CanvasGroup currentCanvas;
 
@@ -39,35 +34,28 @@ namespace HyperCasual
             currentCanvas = group;
         }
 
-        public void ShowMenuCanvas()
+        public virtual void ShowMenuCanvas()
         {
             HideCurrentCanvas();
-            menuScoreText.text = GameManager.Instance.TotalScore.ToString();
             ShowCanvas(menuCanvas);
         }
 
-        public void ShowLevelCanvas()
+        public virtual void ShowLevelCanvas()
         {
             HideCurrentCanvas();
             ShowCanvas(levelCanvas);
         }
 
-        public void ShowWinCanvas()
+        public virtual void ShowWinCanvas()
         {
             HideCurrentCanvas();
-            winScoreText.text = LevelManager.Instance.Score.ToString();
             ShowCanvas(winCanvas);
         }
 
-        public void ShowLoseCanvas()
+        public virtual void ShowLoseCanvas()
         {
             HideCurrentCanvas();
             ShowCanvas(loseCanvas);
-        }
-
-        public void UpdateLevelScore()
-        {
-            levelScoreText.text = LevelManager.Instance.Score.ToString();
         }
     }
 }

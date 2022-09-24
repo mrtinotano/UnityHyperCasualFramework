@@ -5,81 +5,73 @@ namespace HyperCasual
 {
     public class GameManager : Singleton<GameManager>
     {
-        private enum GameState
+        public enum GameState
         {
             Idle,
             Playing
         }
 
-        private GameState gameState = GameState.Idle;
+        public GameState State { get; private set; } = GameState.Idle;
 
-        public int TotalScore { get; private set; }
-        public int CurrentLevel { get; private set; }
-
-
-        private const string TotalScoreKey = "TotalScore"; 
-        private const string CurrentLevelKey = "CurrentLevel"; 
+        [SerializeField] private int TargetFrameRate = 60;
 
 
         protected override void Awake()
         {
             base.Awake();
 
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = TargetFrameRate;
 
             LoadData();
         }
 
-        private void Start()
+        protected virtual void Start()
         {
-            CanvasManager.Instance.ShowMenuCanvas();
+            UIManager.Instance.ShowMenuCanvas();
             PrepareLevel();
         }
 
-        public void StartGame()
+        public virtual void StartGame()
         {
-            if (gameState != GameState.Idle)
+            if (State != GameState.Idle)
                 return;
+
+            State = GameState.Playing;
 
             LevelManager.Instance.StartLevel();
         }
 
-        public void EndGame(bool win)
+        public virtual void EndGame(bool win)
         {
+            if (State != GameState.Playing)
+                return;
+
+            State = GameState.Idle;
+
             if (win)
             {
-                TotalScore += LevelManager.Instance.Score;
-                CanvasManager.Instance.ShowWinCanvas();
+                UIManager.Instance.ShowWinCanvas();
             }
             else
             {
-                CanvasManager.Instance.ShowLoseCanvas();
+                UIManager.Instance.ShowLoseCanvas();
             }
 
             SaveData();
         }
 
-        private void PrepareLevel()
+        protected virtual void PrepareLevel()
         {
-            CanvasManager.Instance.ShowMenuCanvas();
+            UIManager.Instance.ShowMenuCanvas();
             LevelManager.Instance.SetupLevel();
         }
 
         protected virtual void SaveData()
         {
-            PlayerPrefs.SetInt(TotalScoreKey, TotalScore);
-            PlayerPrefs.SetInt(CurrentLevelKey, CurrentLevel);
-            PlayerPrefs.Save();
         }
 
         protected virtual void LoadData()
         {
-            //Check if file exist
-            if (!PlayerPrefs.HasKey(TotalScoreKey))
-                return;
-
-            TotalScore = PlayerPrefs.GetInt(TotalScoreKey);
-            CurrentLevel = PlayerPrefs.GetInt(CurrentLevelKey);
         }
     }
 }
